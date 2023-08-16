@@ -1,0 +1,9 @@
+{% if word_list %}
+    <ul>
+    {% for word in word_list %}
+        <li><a href="/words/{{ word.id }}/">{{ word.word_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No words are available.</p>
+{% endif %}
