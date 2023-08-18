@@ -1,9 +1,23 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'words/css/styles.css' %}"/>
 {% if word_list %}
-    <ul>
+    <h1 id="title">Words in {{ language }}:</h1>
+    <ul hidden>
     {% for word in word_list %}
-        <li><a href="/words/{{ word.id }}/">{{ word.word_text }}</a></li>
+        <!--<li><a href="/words/{{ word.id }}/">{{ word.word_text }}</a></li>-->
+        <li class="floating_word">{{ word.word_text }}</li>
     {% endfor %}
     </ul>
+    <canvas id="floating_words_canvas"></canvas>
 {% else %}
-    <p>No words are available.</p>
+    <h1>No words are available in {{ language }}</h1>
 {% endif %}
+
+<form id="add_word_form" action="/words/add/" method="post">
+    {% csrf_token %}
+    <input type="text" name="word_text" id="word_text" required/>
+    <input type="submit" value="Add word"/>
+    <input type="hidden" name="word_lang" value="{{ language }}"/>
+</form>
+
+<script src="{% static 'words/js/floating_words.js' %}"></script>

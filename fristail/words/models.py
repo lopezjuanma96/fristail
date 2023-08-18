@@ -11,9 +11,13 @@ language_choices = [
     ('pt', 'Português')
 ]
 
+
 class Word(models.Model):
     word_text = models.CharField('text', max_length=200)
-    word_lang = models.CharField('language', max_length=2, choices=language_choices, default='en')
+    word_lang = models.CharField(
+        'language', max_length=2,
+        choices=language_choices, default='en'
+        )
     word_freq = models.FloatField('frequency', default=1.0)
     word_date = models.DateTimeField('posted date', auto_now_add=True)
 
